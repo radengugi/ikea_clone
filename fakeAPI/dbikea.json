@@ -1,0 +1,179 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "email": "admin@mail.com",
+      "password": "1234",
+      "cart": [
+        {
+          "nameProduct": "Lampu Belajar",
+          "type": "Black",
+          "qty": 5,
+          "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/092/0609293_PE684430_S4.jpg",
+          "price": 350000,
+          "totalHarga": 1750000
+        }
+      ],
+      "role": "admin"
+    },
+    {
+      "username": "gugi",
+      "email": "gugi@mail.com",
+      "password": "1234",
+      "role": "user",
+      "id": 2,
+      "cart": []
+    }
+  ],
+  "products": [
+    {
+      "nameProduct": "Lampu Belajar",
+      "description": "Lampu Untuk belajar",
+      "brand": "Philips",
+      "stock": [
+        {
+          "id": null,
+          "type": "Black",
+          "qty": 5
+        },
+        {
+          "id": null,
+          "type": "White",
+          "qty": 20
+        }
+      ],
+      "image": [
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/092/0609293_PE684430_S4.jpg",
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/724/0472405_PE614068_S4.jpg",
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/768/0176854_PE309442_S4.jpg"
+      ],
+      "category": "Lampu",
+      "price": 350000,
+      "id": 3
+    },
+    {
+      "nameProduct": "Lemari Pakaian",
+      "description": "Lemari pakaian ini memadukan garis bersih desain perabot Skandinavia dengan tampilan dan nuansa orient. Penyimpanan untuk pakaian dan barang-barang Anda serta potongan pernyataan di rumah Anda.",
+      "brand": "NORDKISA",
+      "stock": [
+        {
+          "id": null,
+          "type": "Brown",
+          "qty": 8
+        }
+      ],
+      "image": [
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/560/0756080_PE748763_S4.jpg",
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/560/0756079_PE748762_S4.jpg",
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/136/0813674_PH165924_S4.jpg"
+      ],
+      "category": "Lemari",
+      "price": 3299000,
+      "id": 4
+    },
+    {
+      "nameProduct": "Gantungan",
+      "description": "Membantu mengosongkan ruang kerja meja sekaligus membuat peralatan masak mudah dijangkau.",
+      "brand": "HULTARP",
+      "stock": [
+        {
+          "id": null,
+          "type": "Black",
+          "qty": 15
+        },
+        {
+          "id": null,
+          "type": "White",
+          "qty": 20
+        }
+      ],
+      "image": [
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/412/0941222_PE795397_S4.jpg",
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/412/0941234_PE795390_S4.jpg",
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/414/0941454_PE795466_S4.jpg"
+      ],
+      "category": "Gantungan",
+      "price": 99000,
+      "id": 5
+    },
+    {
+      "nameProduct": "Piring",
+      "description": "Untuk hiasan meja yang formal maupun santai, desain fungsional sederhana ini mudah diserasikan dengan bentuk dan warna lain. Seri FÄRGRIK adalah tempat sempurna untuk semua jenis makanan dan setiap momen.",
+      "brand": "FÄRGRIK",
+      "stock": [
+        {
+          "id": null,
+          "type": "Green",
+          "qty": 25
+        },
+        {
+          "id": null,
+          "type": "White",
+          "qty": 30
+        },
+        {
+          "id": null,
+          "type": "Black",
+          "qty": 10
+        }
+      ],
+      "image": [
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/544/0454476_PE602782_S4.jpg",
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/989/0898926_PE617657_S4.jpg",
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/245/0624541_PE691888_S4.jpg"
+      ],
+      "category": "Alat Saji",
+      "price": 499000,
+      "id": 6
+    },
+    {
+      "nameProduct": "Sofa",
+      "description": "Tidur siang nyenyak di siang hari dan bersantai dengan keluarga dan teman-teman di malam hari. Sofa LIDHULT dirancang untuk kenyamanan maksimal dengan penopang punggung dan leher yang tinggi yang merangkul, mengundang, dan lapang.",
+      "brand": "LIDHULT",
+      "stock": [
+        {
+          "id": null,
+          "type": "Black",
+          "qty": 23
+        }
+      ],
+      "image": [
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/201/0620123_PE689434_S4.jpg",
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/254/0825437_PE689435_S4.jpg",
+        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/254/0825435_PE689433_S4.jpg"
+      ],
+      "category": "Sofa",
+      "price": 29990000,
+      "id": 7
+    }
+  ],
+  "userTransaction": [
+    {
+      "idUser": 2,
+      "username": "gugi",
+      "totalPayment": 121457000,
+      "cart": [
+        {
+          "nameProduct": "Piring",
+          "type": "White",
+          "qty": 3,
+          "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/544/0454476_PE602782_S4.jpg",
+          "price": 499000,
+          "totalHarga": 1497000
+        },
+        {
+          "nameProduct": "Sofa",
+          "type": "Black",
+          "qty": 4,
+          "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/201/0620123_PE689434_S4.jpg",
+          "price": 29990000,
+          "totalHarga": 119960000
+        }
+      ],
+      "status": "unpaid",
+      "date": "11/3/2021",
+      "id": 1
+    }
+  ]
+}
