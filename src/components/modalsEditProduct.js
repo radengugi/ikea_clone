@@ -8,23 +8,23 @@ class ModalEditProduct extends React.Component {
         super(props);
         this.state = {
             stock: props.detailProduk.stock,
-            image: props.detailProduk.image
+            images: props.detailProduk.images
         }
     }
 
     onBtnAdd = () => {
         console.log(this.state.stock)
-        let nameProduct = this.inName.value
-        let description = this.inDescription.value
+        let nama = this.inName.value
+        let deskripsi = this.inDescription.value
         let brand = this.inBrand.value
-        let category = this.inCategory.value
+        // let category = this.inCategory.value
         let stock = this.state.stock
-        let image = this.state.image
-        let price = parseInt(this.inPrice.value)
-        console.log(nameProduct, description, brand, stock, image, category, price)
+        let images = this.state.images
+        let harga = parseInt(this.inPrice.value)
+        console.log(nama, deskripsi, brand, stock, images, harga)
 
-        axios.post(URL_API + '/products', {
-            nameProduct, description, brand, stock, image, category, price
+        axios.post(URL_API + '/products/add', {
+            nama, deskripsi, brand, stock, images, harga
         })
             .then(res => {
                 console.log(res.data)
@@ -41,12 +41,13 @@ class ModalEditProduct extends React.Component {
         // let tempStock = [...this.state.stock]
         this.state.stock.push({ id: null, type: null, qty: null })
         this.setState({ stock: this.state.stock })
+        // console.log("Cek button Stock :", this.state.stock)
     }
 
     printStock = () => {
-        let { stock } = this.state
-        if (stock) {
-            return stock.map((item, index) => {
+        // let { stock } = this.state
+        if (this.props.detailProduk.stock) {
+            return this.props.detailProduk.stock.map((item, index) => {
                 return <Row>
                     <Col>
                         <Input type="text" defaultValue={item.type} placeholder={`Type${index + 1}`} onChange={(e) => this.handleType(e, index)} />
@@ -68,12 +69,12 @@ class ModalEditProduct extends React.Component {
     }
 
     printImage = () => {
-        let { image } = this.state
-        if (image) {
-            return image.map((item, index) => {
+        // let { images } = this.state
+        if (this.props.detailProduk.images) {
+            return this.props.detailProduk.images.map((item, index) => {
                 return <Row>
                     <Col>
-                        <Input type="text" defaultValue={item} placeholder={`Image${index + 1}`} onChange={(e) => this.handleImage(e, index)} />
+                        <Input type="text" defaultValue={item.images} placeholder={`Image${index + 1}`} onChange={(e) => this.handleImage(e, index)} />
                     </Col>
                     <Col>
                         <a onClick={() => this.onBtnDeleteImage(index)}>Delete</a>
@@ -84,17 +85,17 @@ class ModalEditProduct extends React.Component {
     }
 
     onBtnAddImage = () => {
-        this.state.image.push("")
-        this.setState({ image: this.state.image })
+        this.state.images.push("")
+        this.setState({ images: this.state.images })
     }
 
     onBtnDeleteImage = (index) => {
-        this.props.detailProduk.image.splice(index, 1)
-        this.setState({ image: this.state.image })
+        this.props.detailProduk.images.splice(index, 1)
+        this.setState({ images: this.state.images })
     }
 
     handleImage = (e, index) => {
-        this.props.detailProduk.image[index] = e.target.value
+        this.props.detailProduk.images[index] = e.target.value
     }
 
     handleType = (e, index) => {
@@ -112,17 +113,17 @@ class ModalEditProduct extends React.Component {
     }
 
     onBtnSave = () => {
-        let nameProduct = this.inName.value
-        let description = this.inDescription.value
+        let nama = this.inName.value
+        let deskripsi = this.inDescription.value
         let brand = this.inBrand.value
-        let category = this.inCategory.value
+        // let category = this.inCategory.value
         let stock = this.props.detailProduk.stock
-        let image = this.props.detailProduk.image
-        let price = parseInt(this.inPrice.value)
-        console.log({ nameProduct, description, brand, category, stock, image, price })
+        let images = this.props.detailProduk.images
+        let harga = parseInt(this.inPrice.value)
+        console.log({ nama, deskripsi, brand, stock, images, harga })
 
-        axios.patch(URL_API + `/products/${this.props.detailProduk.id}`, {
-            nameProduct, description, brand, category, stock, image, price
+        axios.patch(URL_API + `/products/update/${this.props.detailProduk.id}`, {
+            nama, deskripsi, brand, stock, images, harga
         })
             .then(res => {
                 console.log(res.data)
@@ -138,18 +139,18 @@ class ModalEditProduct extends React.Component {
 
     render() {
         // console.log("detailProduk", this.props.detailProduk)
-        let { nameProduct, description, category, brand, price } = this.props.detailProduk
+        let { nama, deskripsi, category, brand, harga } = this.props.detailProduk
         return (
             <Modal isOpen={this.props.modal} toggle={this.props.btClose}>
                 <ModalHeader toggle={this.props.btClose}>Edit Product</ModalHeader>
                 <ModalBody>
                     <FormGroup style={{ padding: '2vw' }}>
                         <Label for="textName">Input Nama</Label>
-                        <Input type="text" id="textName" defaultValue={nameProduct} innerRef={elemen => this.inName = elemen} />
+                        <Input type="text" id="textName" defaultValue={nama} innerRef={elemen => this.inName = elemen} />
                     </FormGroup>
                     <FormGroup style={{ padding: '2vw', marginTop: '-6vh' }}>
                         <Label for="textDescription">Description</Label>
-                        <Input type="text" id="textDescription" defaultValue={description} innerRef={elemen => this.inDescription = elemen} />
+                        <Input type="text" id="textDescription" defaultValue={deskripsi} innerRef={elemen => this.inDescription = elemen} />
                     </FormGroup>
                     <Row>
                         <Col>
@@ -158,12 +159,12 @@ class ModalEditProduct extends React.Component {
                                 <Input type="text" id="textBrand" defaultValue={brand} innerRef={elemen => this.inBrand = elemen} />
                             </FormGroup>
                         </Col>
-                        <Col>
+                        {/* <Col>
                             <FormGroup style={{ padding: '2vw', marginTop: '-6vh' }}>
                                 <Label for="textCategory">Category</Label>
                                 <Input type="text" id="textCategory" defaultValue={category} innerRef={elemen => this.inCategory = elemen} />
                             </FormGroup>
-                        </Col>
+                        </Col> */}
                     </Row>
                     <FormGroup style={{ padding: '2vw', marginTop: '-6vh' }}>
                         <Label className="mr-5">Stock</Label>
@@ -177,7 +178,7 @@ class ModalEditProduct extends React.Component {
                     </FormGroup>
                     <FormGroup style={{ padding: '2vw', marginTop: '-6vh' }}>
                         <Label for="textPrice">Price</Label>
-                        <Input type="text" id="textPrice" defaultValue={price} innerRef={elemen => this.inPrice = elemen} />
+                        <Input type="text" id="textPrice" defaultValue={harga} innerRef={elemen => this.inPrice = elemen} />
                     </FormGroup>
                 </ModalBody>
                 <ModalFooter>

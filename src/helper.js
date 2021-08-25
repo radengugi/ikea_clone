@@ -1,4 +1,5 @@
-export const URL_API="http://localhost:2022"
+export const URL_API="http://localhost:2025"
+// export const URL_API="http://localhost:6050"
 
 /*
 Tugas :

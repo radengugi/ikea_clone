@@ -8,24 +8,49 @@ class ModalProduct extends React.Component {
         super(props);
         this.state = {
             stock: [],
-            image: []
+            images: [],
+            fileName: "Select File",
+            fileUpload: null,
+            fileSrc: null
         }
     }
 
+    onBtnFile = (e) => {
+        if (e.target.files[0]) {
+            var reader = new FileReader()
+            this.setState({
+                fileName: e.target.files[0].name,
+                fileUpload: e.target.files[0],
+                fileSrc: URL.createObjectURL(e.target.files[0])
+            })
+        } else {
+            this.setState({
+                fileName: "Select File",
+                fileUpload: null,
+                fileSrc: `https://safetyaustraliagroup.com.au/wp-content/uploads/2019/05/image-not-found.png`
+            })
+        }
+    }
+
+
     onBtnAdd = () => {
         console.log(this.state.stock)
-        let nameProduct = this.inName.value
-        let description = this.inDescription.value
-        let brand = this.inBrand.value
-        let category = this.inCategory.value
-        let stock = this.state.stock
-        let image = this.state.image
-        let price = parseInt(this.inPrice.value)
-        console.log({nameProduct, description, brand, stock, image, category, price})
+        let formData = new FormData()
+        let data = {
+            nama: this.inName.value,
+            brand: this.inBrand.value,
+            deskripsi: this.inDescription.value,
+            // let category = this.inCategory.value,
+            harga: parseInt(this.inPrice.value),
+            idstatus: 1,
+            // images: this.state.images,
+            stock: this.state.stock
+            // idcategory: 10
+        }
 
-        axios.post(URL_API + '/products', {
-            nameProduct, description, brand, stock, image, category, price
-        })
+        formData.append('data', JSON.stringify(data))
+        formData.append('images', this.state.fileUpload)
+        axios.post(URL_API + '/products/add', formData)
             .then(res => {
                 console.log(res.data)
                 this.props.getDataProduct()
@@ -67,8 +92,8 @@ class ModalProduct extends React.Component {
     }
 
     printImage = () => {
-        if (this.state.image.length > 0) {
-            return this.state.image.map((item, index) => {
+        if (this.state.images.length > 0) {
+            return this.state.images.map((item, index) => {
                 return <Row>
                     <Col>
                         <Input type="text" placeholder={`Image${index + 1}`} onChange={(e) => this.handleImage(e, index)} />
@@ -82,17 +107,17 @@ class ModalProduct extends React.Component {
     }
 
     onBtnAddImage = () => {
-        this.state.image.push("")
-        this.setState({ image: this.state.image })
+        this.state.images.push("")
+        this.setState({ images: this.state.images })
     }
 
     onBtnDeleteImage = (index) => {
-        this.state.image.splice(index, 1)
-        this.setState({ image: this.state.image })
+        this.state.images.splice(index, 1)
+        this.setState({ images: this.state.images })
     }
 
     handleImage = (e, index) => {
-        this.state.image[index] = e.target.value
+        this.state.images[index] = e.target.value
     }
 
     handleType = (e, index) => {
@@ -104,7 +129,7 @@ class ModalProduct extends React.Component {
     }
 
     onBtnCancel = () => {
-        this.setState({ stock: [], image: [] })
+        this.setState({ stock: [], images: [] })
         // fungsi untuk close modal
         this.props.btClose()
     }
@@ -143,8 +168,28 @@ class ModalProduct extends React.Component {
                     </FormGroup>
                     <FormGroup style={{ padding: '2vw', marginTop: '-6vh' }}>
                         <Label className="mr-5">Image</Label>
-                        <Button outline color="success" type='button' size="sm" style={{ float: 'right' }} onClick={this.onBtnAddImage} >Add Image</Button>
-                        {this.printImage()}
+                        {/* <Input type="file" placeholder="Search File" onChange={this.onBtnFile} label={this.state.fileName} /> */}
+                        <div className="row">
+                            <div className="col-md-6 text-center">
+                                {/* <img id="imgpreview" style={{ maxWidth: '95%' }} className="col-8 mx-auto" alt="previ" src={this.state.fileUpload ? URL.createObjectURL(this.state.fileUpload) : "https://kubalubra.is/wp-content/uploads/2017/11/default-thumbnail.jpg"} /> */}
+                                {this.state.fileSrc == null ? (
+                                    <>
+                                        <img src="https://portal.bimakota.go.id/upload/not_image.png" width="150px" height="auto" />
+                                    </>
+                                ) : (
+                                    <>
+                                        <img src={this.state.fileSrc} width="150px" height="auto" />
+                                    </>
+                                )}
+                                &nbsp;
+                            </div>
+                            <div className="col-md-6 py-5">
+                                <Input type="file" label={this.state.fileName} onChange={this.onBtnFile}></Input>
+                            </div>
+                        </div>
+
+                        {/* <Button outline color="success" type='button' size="sm" style={{ float: 'right' }} onClick={this.onBtnAddImage} >Add Image</Button> */}
+                        {/* {this.printImage()} */}
                     </FormGroup>
                     <FormGroup style={{ padding: '2vw', marginTop: '-6vh' }}>
                         <Label for="textPrice">Price</Label>

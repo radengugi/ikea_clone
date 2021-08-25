@@ -9,17 +9,17 @@ import {
 
 const items = [
     {
-        src: 'https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/pageImages/page__en_us_1614767184__0.jpeg',
+        src: 'https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/pageImages/page__en_us_1627635082_0_2.jpeg',
         // altText: 'Slide 1',
         // caption: 'Slide 1'
     },
     {
-        src: 'https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/pageImages/page__en_us_1612061332__3.jpeg',
+        src: 'https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/pageImages/page__en_us_1627618786_1_2.jpeg',
         // altText: 'Slide 2',
         // caption: 'Slide 2'
     },
     {
-        src: 'https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/pageImages/page__en_us_1615978170__0.jpeg',
+        src: 'https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/pageImages/page__en_us_1625804589__0.jpeg',
         // altText: 'Slide 3',
         // caption: 'Slide 3'
     }

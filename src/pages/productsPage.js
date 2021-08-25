@@ -25,19 +25,18 @@ class ProductsPage extends React.Component {
 
     printProducts = () => {
         // if (this.props.productsList.length > 0) {
+        // console.log("Cek Data :", this.state.data)
         return this.state.data.map((item, index) => {
-            return <div className="col-md-3 my-2">
-                <Card>
-                    <Link to={`/product-detail?id=${item.id}`} style={{textDecoration: 'none', color:'black'}}>
-                        <CardImg top width="100%" src={item.image[0]} alt="Card image cap" />
-                        <CardBody>
-                            <CardTitle tag="h5" style={{ fontWeight: 'bolder' }}>{item.nameProduct} </CardTitle>
-                            <CardSubtitle tag="h6" className="mb-2 text-muted">{item.category}</CardSubtitle>
-                            <CardText tag="h5" style={{ fontWeight: 'bolder' }}>Rp {item.price.toLocaleString()}</CardText>
-                            <Button type="button" outline style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                <span class="material-icons">
-                                    visibility
-                                </span>
+            return <div className="col-md-3 my-2 product-page">
+                <Card className="card">
+                    <Link to={`/products-detail?idproducts=${item.idproducts}`} style={{ textDecoration: 'none', color: 'black' }}>
+                        <CardImg className="card-img" top width="100%" src={item.images[0].images} alt="product-image"/>
+                        <CardBody className="card-body">
+                            <CardTitle tag="h5" className="card-title">{item.nama} </CardTitle>
+                            <CardSubtitle tag="h6" className="mb-2 text-muted card-subtitle">{item.deskripsi}</CardSubtitle>
+                            <CardText tag="h5" className="card-text">Rp {item.harga.toLocaleString()}</CardText>
+                            <Button className="btn-sekilas" type="button" outline>
+                                <span className="material-icons">visibility</span>
                                 <span>Lihat Sekilas</span>
                             </Button>
                         </CardBody>
@@ -64,21 +63,21 @@ class ProductsPage extends React.Component {
 
     // Cara 2 : sort dari data reducer
     sortReducer = () => {
-        let field = this.sort.value.split('-')[0]
-        let sortType = this.sort.value.split('-')[1]
+        let field = this.sortField.value.split('-')[0]
+        let sortType = this.sortField.value.split('-')[1]
         let tempData = [...this.props.products] // duplicate data dari reducer ke variabel tempData
         if (sortType == 'asc') {
             let dataAsc = tempData.sort((a, b) => {
                 return a[field] - b[field] // b[field] sama dengan b.field
             })
-            console.log(dataAsc)
+            console.log("Data Ascending :",dataAsc)
             this.setState({ data: dataAsc })
             // this.props.sortProducts(dataAsc)
         } else if (sortType == 'desc') {
             let dataDesc = tempData.sort((a, b) => {
                 return b[field] - a[field]
             })
-            console.log(dataDesc)
+            console.log("Data Descending :",dataDesc)
             this.setState({ data: dataDesc })
             // this.props.sortProducts(dataDesc)
         }
@@ -87,7 +86,7 @@ class ProductsPage extends React.Component {
     render() {
         return (
             <div className='container column my-5'>
-                <Input type='select' style={{ width: '15vw', float: 'right', marginRight: '0.5vw' }} onChange={this.sortReducer} innerRef={elemen => this.sort = elemen}>
+                <Input type='select' style={{ width: '15vw', float: 'right', marginRight: '2.2vw', marginBottom:'4vh' }} onChange={this.sortReducer} innerRef={elemen => this.sortField = elemen}>
                     <option value="nameProduct-asc">A-Z</option>
                     <option value="nameProduct-desc">Z-A</option>
                     <option value="price-asc">Harga Asc</option>
@@ -102,7 +101,7 @@ class ProductsPage extends React.Component {
     }
 }
 
-const mapToProps = ({ productReducers }) => {
+const mapToProps = ({ productReducers}) => {
     return {
         products: productReducers.products_list,
         productsList: productReducers.products_sort

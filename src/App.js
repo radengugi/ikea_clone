@@ -14,7 +14,10 @@ import NotFound from './pages/notFound';
 import ProductsPage from './pages/productsPage';
 import ProductDetail from './pages/productDetail';
 import CartPage from './pages/cartPage';
-import HistoryUser from './pages/historyUser';
+import transactionManagement from './pages/transactionManagement';
+import historyUser from './pages/historyUser';
+import TransactionPage from './pages/transactionPage';
+import VerificationPage from './pages/verificationPage';
 
 class App extends React.Component {
   constructor(props) {
@@ -26,12 +29,28 @@ class App extends React.Component {
 
   componentDidMount() {
     this.reLogin()
-    // this.getProducts()
     this.props.getProductAction()
   }
 
   reLogin = () => {
-    this.props.keepLogin()
+    let token = localStorage.getItem("tkn_id")
+    if (token) {
+      const headers = {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      }
+      axios.post(URL_API + `/users/keeplogin`, {}, headers)
+        .then(res => {
+          // this.props.keepLogin(res.data[0])
+          this.props.keepLogin(res.data)
+        })
+        .catch(err => {
+          console.log("Keep Login Error :", err)
+        })
+    }
+
+    // this.props.keepLogin()
     // let idToken = localStorage.getItem("tkn_id")
     // axios.get(URL_API + `/users?id=${idToken}`)
     //   .then(res => {
@@ -61,11 +80,14 @@ class App extends React.Component {
           <Route path="/" component={LandingPage} exact />
           <Route path="/login" component={LoginPage} />
           <Route path="/products" component={ProductsPage} />
-          <Route path="/product-detail" component={ProductDetail} />
+          <Route path="/products-detail" component={ProductDetail} />
           <Route path="/cart" component={CartPage} />
-          <Route path="/history-user" component={HistoryUser} />
+          {/* <Route path="/history" component={historyUser} />
+          <Route path="/transaction-management" component={transactionManagement} /> */}
+          <Route path="/history" component={TransactionPage} />
+          <Route path="/verification" component={VerificationPage} />
           {
-            this.props.role == "admin" &&
+            this.props.role == "Admin" &&
             <>
               <Route path="/product-management" component={ProductManagement} />
             </>

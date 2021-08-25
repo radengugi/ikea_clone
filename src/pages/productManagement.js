@@ -24,10 +24,10 @@ class ProductManagement extends React.Component {
         }
     }
 
-    componentDidMount() {
-        // this.getDataProduct()
-        this.props.getProductAction()
-    }
+    // componentDidMount() {
+    //     // this.getDataProduct()
+    //     this.props.getProductAction()
+    // }
 
     // getDataProduct = () => {
     //     axios.get(URL_API + `/products`)
@@ -42,29 +42,29 @@ class ProductManagement extends React.Component {
     // }
 
     printProduct = () => {
+        // console.log("Cek get data :", this.props.products)
         return this.props.products.map((item, index) => {
             return <tr>
                 <td>{index + 1}</td>
                 <td style={{ width: '20vw', textAlign: 'center' }}>
                     {
                         this.state.thumbnail[0] == index ?
-                            <img src={item.image[this.state.thumbnail[1]]} style={{ width: '80%' }} alt={item.nameProduct + index} />
+                            <img src={item.images[this.state.thumbnail[1]].images} style={{ width: '80%' }} alt={item.nama + index} />
                             :
-                            <img src={item.image[0]} style={{ width: '80%' }} alt={item.nameProduct + index} />
+                            <img src={item.images[0].images} style={{ width: '80%' }} alt={item.nama + index} />
                     }
                     <div>
                         {
-                            item.image.map((value, idx) => {
-                                return <img src={value} style={{ kursor }} width="20%" alt={item.nameProduct + idx}
+                            item.images.map((value, idx) => {
+                                return <img src={value.images} style={{ kursor }} width="20%" alt={item.nama + idx}
                                     onClick={() => this.setState({ thumbnail: [index, idx] })} />
                             })
                         }
                     </div>
                 </td>
-                <td>{item.nameProduct}</td>
-                <td>{item.description}</td>
+                <td>{item.nama}</td>
+                <td>{item.deskripsi}</td>
                 <td>{item.brand}</td>
-                <td>{item.category}</td>
                 <td>
                     {
                         item.stock.map((item, index) => {
@@ -72,19 +72,20 @@ class ProductManagement extends React.Component {
                         })
                     }
                 </td>
-                <td>Rp {item.price.toLocaleString()}</td>
+                <td>Rp {item.harga.toLocaleString()}</td>
                 <td>
                     <Button type="button" color="warning" onClick={() => this.setState({ detailProduk: item, modalsEdit: !this.state.modalsEdit })}>Edit</Button>{' '}
-                    <Button color="danger" onClick={() => this.onBtnDelete(item.id)}>Delete</Button>{' '}
+                    <Button color="danger" onClick={() => this.onBtnDelete(item.idproducts)}>Delete</Button>{' '}
                 </td>
             </tr>
         })
     }
 
     onBtnDelete = (id) => {
-        axios.delete(URL_API + `/products/${id}`)
+        axios.delete(URL_API + `/products/delete?id=${id}`)
             .then(res => {
-                this.getDataProduct()
+                // this.getDataProduct()
+                alert("Delete Success",res.data)
             })
             .catch(err => {
                 console.log(err)
@@ -140,6 +141,7 @@ class ProductManagement extends React.Component {
     // }
 
     // Cara kedua
+
     sorting = () => {
         let field = this.sort.value.split("-")[0]
         let sortType = this.sort.value.split("-")[1]
@@ -187,7 +189,7 @@ class ProductManagement extends React.Component {
                                 <th>Nama</th>
                                 <th>Deskripsi</th>
                                 <th>Brand</th>
-                                <th>Kategori</th>
+                                {/* <th>Kategori</th> */}
                                 <th>Stock</th>
                                 <th>Harga</th>
                                 <th>Action</th>
@@ -204,9 +206,10 @@ class ProductManagement extends React.Component {
 }
 
 const mapToProps = ({ productReducers }) => {
+    console.log("Cek reducer :", productReducers.products_list)
     return {
         products: productReducers.products_list
     }
 }
 
-export default connect(mapToProps, {getProductAction})(ProductManagement);
+export default connect(mapToProps, { getProductAction })(ProductManagement);

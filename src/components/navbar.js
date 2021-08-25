@@ -30,13 +30,17 @@ class NavbarComp extends React.Component {
 
     printSearch = () => {
         return this.state.dataSearch.map((item, index) => {
-            return <DropdownItem>{item.nameProduct}</DropdownItem>
+            return (
+                <Link to={`/product-detail?id=${index}`}>
+                    <DropdownItem>{item.nama}</DropdownItem>
+                </Link>
+            )
         })
     }
 
     printCart = () => {
         return this.props.cart.map((item, index) => {
-            return <DropdownItem><img src={item.image} width='50px' /> : {item.qty}</DropdownItem>
+            return <DropdownItem><img src={item.images} width='50px' /> : {item.qty}</DropdownItem>
         })
     }
 
@@ -45,19 +49,19 @@ class NavbarComp extends React.Component {
         return (
             <div className="container-fluid">
                 <div>
-                    <ul type="none" className="d-flex m-2" style={{ justifyContent: 'space-between', color: 'blue' }}>
-                        <li>Indonesia</li>
-                        <li><Link>Bahasa</Link></li>
-                        <li><Link>Informasi Toko</Link></li>
-                        <li><Link>Kebijakan Pengembalian</Link></li>
-                        <li><Link>IKEA Bisnis</Link></li>
-                        <li><Link>Lacak Pengiriman</Link></li>
-                        <li><Link>Katalog dan Brosur</Link></li>
-                        <li><Link>Program Perencanaan</Link></li>
-                        <li><Link to="/login"><a>Masuk atau Daftar</a></Link></li>
+                    <ul type="none" className="d-flex m-2" style={{ justifyContent: 'space-between' }}>
+                        <li style={{color:'gray'}}>Indonesia</li>
+                        <li><Link style={{color:'gray'}}>Bahasa</Link></li>
+                        <li><Link style={{color:'gray'}}>Informasi Toko</Link></li>
+                        <li><Link style={{color:'gray'}}>Kebijakan Pengembalian</Link></li>
+                        <li><Link style={{color:'gray'}}>IKEA Bisnis</Link></li>
+                        <li><Link style={{color:'gray'}}>Lacak Pengiriman</Link></li>
+                        <li><Link style={{color:'gray'}}>Katalog dan Brosur</Link></li>
+                        <li><Link style={{color:'gray'}}>Program Perencanaan</Link></li>
+                        <li><Link to="/login" style={{color:'gray'}}><a>Masuk atau Daftar</a></Link></li>
                     </ul>
                 </div>
-                <Navbar expand="md" style={{ backgroundColor: '#FFFFFF' }}>
+                <Navbar expand="md" style={{ backgroundColor: '#FFFFFF', borderTop:'1px solid #95a5a6' }}>
                     <NavbarBrand>
                         <Link to="/">
                             <img src="https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/logos/IKEA_logo.svg"
@@ -70,7 +74,7 @@ class NavbarComp extends React.Component {
                             <NavItem>
                                 <Link to="/products" className="nav-link" style={{ color: 'black', fontWeight: 'bold' }}>Products</Link>
                             </NavItem>
-                            <UncontrolledDropdown nav inNavbar>
+                            {/* <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav caret style={{ color: 'gray', fontWeight: 'bolder' }}>
                                     Category
                                 </DropdownToggle>
@@ -86,16 +90,18 @@ class NavbarComp extends React.Component {
                                         Reset
                                 </DropdownItem>
                                 </DropdownMenu>
-                            </UncontrolledDropdown>
+                            </UncontrolledDropdown> */}
                             <NavItem>
-                                <NavLink href="/components/" style={{ color: 'gray' }}>Inspirasi</NavLink>
+                                <NavLink href="/components/" style={{ color: 'gray' }}>Ruangan</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/components/" style={{ color: 'gray' }}>Harga lebih rendah</NavLink>
+                                <NavLink href="/components/" style={{ color: 'gray' }}>Home Essentials</NavLink>
                             </NavItem>
-                            <NavItem>
-                                <NavLink href="/components/" style={{ color: 'gray' }}>Last chance!</NavLink>
-                            </NavItem>
+                            {/* <NavItem>
+                                <Link to="/transaction-management" className="nav-link" style={{ color: 'black', fontWeight: 'bold' }}>
+                                    History User
+                                </Link>
+                            </NavItem> */}
                         </Nav>
                         <UncontrolledButtonDropdown>
                             <DropdownToggle id="caret" color="info" className="mx-2" style={{ display: 'flex', width: '4.5vw' }}>
@@ -129,16 +135,20 @@ class NavbarComp extends React.Component {
                                     </DropdownToggle>
                                     <DropdownMenu right>
                                         {
-                                            this.props.role == "user" ?
+                                            this.props.role == "User" ?
                                                 <>
                                                     <DropdownItem>
                                                         Profile
                                                     </DropdownItem>
                                                     <DropdownItem>
-                                                        Cart
+                                                        <Link to="/cart" style={{ textDecoration: 'none', color: 'gray' }}>
+                                                            Cart
+                                                        </Link>
                                                     </DropdownItem>
                                                     <DropdownItem>
-                                                        History
+                                                        <Link to="/history" style={{ textDecoration: 'none', color: 'gray' }}>
+                                                            History
+                                                        </Link>
                                                     </DropdownItem>
                                                 </> :
                                                 <>
@@ -148,7 +158,9 @@ class NavbarComp extends React.Component {
                                                         </Link>
                                                     </DropdownItem>
                                                     <DropdownItem>
-                                                        Transaction Management
+                                                        <Link to="/history" style={{ textDecoration: 'none', color: 'gray' }}>
+                                                            Transaction Management
+                                                        </Link>
                                                     </DropdownItem>
                                                 </>
                                         }

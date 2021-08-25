@@ -32,13 +32,13 @@ class LoginPage extends React.Component {
             setTimeout(() => this.setState({ alert: !this.state.alert, message: '', alertType: '' }), 3000)
         } else {
             if (email.includes('@')) {
-                axios.get(URL_API + `/users?email=${email}`)
+                axios.get(URL_API + `/users/get-all?email=${email}`)
                     .then(res => {
                         if (res.data.length > 0) {
                             this.setState({ alert: !this.state.alert, message: 'Email sudah terdaftar !', alertType: 'success' })
                             setTimeout(() => this.setState({ alert: !this.state.alert, message: '', alertType: '' }), 3000)
                         } else {
-                            axios.post(URL_API + '/users', {
+                            axios.post(URL_API + '/users/regis', {
                                 username,
                                 email,
                                 password,
@@ -67,23 +67,60 @@ class LoginPage extends React.Component {
         }
     }
 
+    onBtnVerified = async () => {
+        try {
+            let res = await axios.patch(URL_API + `/users/reverification`, {
+                email: this.inEmail.value,
+                password: this.inPassword.value
+            })
+            alert(res.data.message)
+            // alert("Verification Account Success !")
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     onBtnLogin = () => {
         this.props.authLogin(this.inEmail.value, this.inPassword.value)
-        // axios.get(URL_API + `/users?email=${this.inEmail.value}&password=${this.inPassword.value}`)
-        //     .then(res => {
-        //         if (res.data.length > 0) {
-        //             // this.props.authLogin(res.data[0])
-        //             this.props.authLogin()
-        //             // menyimpan data token ke dalam browser
-        //             localStorage.setItem('tkn_id', res.data[0].id)
-        //             this.setState({ redirect: true })
-        //         } else {
-        //             this.setState({ alert: !this.state.alert, message: 'Akun tidak ditemukan !', alertType: 'warning' })
-        //         }
-        //     })
-        //     .catch(err => {
-        //         console.log("Login Error :", err)
-        //     })
+        // if (this.props.users.idstatus === 12) {
+        //     setTimeout(() => this.setState({ alert: !this.state.alert, message: '', alertType: '' }), 3000)
+        //     this.setState({ alert: !this.state.alert, message: 'Please Verify Your Account !!!', alertType: 'warning' })
+        // } else {
+        //     axios.get(URL_API + `/users?email=${this.inEmail.value}&password=${this.inPassword.value}`)
+        //         .then(res => {
+        //             if (res.data.length > 0) {
+        //                 // this.props.authLogin(res.data[0])
+        //                 this.props.authLogin()
+        //                 // menyimpan data token ke dalam browser
+        //                 localStorage.setItem('tkn_id', res.data[0].id)
+        //                 this.setState({ redirect: true })
+        //             } else {
+        //                 this.setState({ alert: !this.state.alert, message: 'Akun tidak ditemukan !', alertType: 'warning' })
+        //             }
+        //         })
+        //         .catch(err => {
+        //             console.log("Login Error :", err)
+        //         })
+        // }
+    }
+
+    handlePassword = (value) => {
+        console.log(this.inRegisPassword.value)
+
+        let huruf = /[a-zA-Z0-9]/
+        // let huruf = /[a-z]/i //untuk menonaktifkan sensitive case untuk menghasilkan true
+        let numb = /[0-9]/
+        // console.log(huruf.test(this.inRegisPassword.value))
+
+        if (huruf.test(this.inRegisPassword.value) || numb.test(this.inRegisPassword.value)) {
+            if (huruf.test(this.inRegisPassword.value) && numb.test(this.inRegisPassword.value)) {
+                console.log('Huruf & Angka :')
+            } else if (huruf.test(this.inRegisPassword.value)) {
+                console.log('Hanya huruf :')
+            } else if (numb.test(this.inRegisPassword.value)) {
+                console.log('Hanya angka :')
+            }
+        }
     }
 
     view = () => {
@@ -99,15 +136,15 @@ class LoginPage extends React.Component {
         // if (this.state.redirect) {
         //     return <Redirect to="/" />
         // }
-        if (this.props.id) {
+        if (this.props.id && this.props.idstatus == 11) {
             return <Redirect to="/" />
         }
         return (
             <div className="container-fluid">
                 <div>
                     <Breadcrumb tag="nav" listTag="div">
-                        <BreadcrumbItem tag="a" href="#" style={{ color: 'gray', fontSize: '14px' }}>Client</BreadcrumbItem>
-                        <BreadcrumbItem tag="a" href="#" style={{ color: 'gray', fontSize: '14px' }}>Access</BreadcrumbItem>
+                        <BreadcrumbItem tag="a" href="#" style={{ color: 'gray', fontSize: '12px' }}>Client</BreadcrumbItem>
+                        <BreadcrumbItem tag="a" href="#" style={{ color: 'gray', fontSize: '12px', fontWeight:'bold' }}>Access</BreadcrumbItem>
                     </Breadcrumb>
                 </div>
                 <div className="container text-center" style={{ width: "80vw", height: '95vh' }}>
@@ -121,6 +158,9 @@ class LoginPage extends React.Component {
                                 <div className="text-left">
                                     <h5 style={{ fontSize: '22px' }}><b>Silahkan masuk ke akun anda</b></h5>
                                     <p style={{ fontSize: '14px', marginTop: '4vh' }}>Silakan masuk ke akun Anda untuk menyelesaikan pembayaran dengan data pribadi Anda.</p>
+                                    <Alert isOpen={this.props.idstatus && this.props.idstatus == 12 ? true : false} color="warning">
+                                        Your Account not verified <a className="alert-link" onClick={this.onBtnVerified}>Request Verification</a>
+                                    </Alert>
                                 </div>
                                 <FormGroup className="mt-4">
                                     <Label for="textEmail" style={{ float: 'left', fontSize: '14px' }}>Email</Label>
@@ -173,7 +213,7 @@ class LoginPage extends React.Component {
                                 <FormGroup className="mt-4">
                                     <Label for="textPassword" style={{ float: 'left', fontSize: '14px' }}>Kata Sandi</Label>
                                     <span className="required" style={{ float: 'right', color: 'red', fontSize: '20px' }}>*</span>
-                                    <Input type={this.state.passType} id="textPassword" placeholder="Masukkan kata sandi Anda..." innerRef={elemen => this.inRegisPassword = elemen} />
+                                    <Input type={this.state.passType} onChange={this.handlePassword} id="textPassword" placeholder="Masukkan kata sandi Anda..." innerRef={elemen => this.inRegisPassword = elemen} />
                                 </FormGroup>
                                 <FormGroup className="mt-4">
                                     <Label for="textConfPassword" style={{ float: 'left', fontSize: '14px' }}>Konfirmasi Kata Sandi</Label>
@@ -194,7 +234,8 @@ class LoginPage extends React.Component {
 
 const mapToProps = ({ authReducer }) => {
     return {
-        id: authReducer.id
+        id: authReducer.iduser,
+        idstatus: authReducer.idstatus
     }
 }
 

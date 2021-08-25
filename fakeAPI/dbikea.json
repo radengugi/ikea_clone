@@ -1,4 +1,9 @@
 {
+  "banner": [
+    "https://images.squarespace-cdn.com/content/v1/530e47f7e4b0576b4fd58db6/1393459072261-B1GHJK1ZT5YR9HHOQ7TZ/ke17ZwdGBToddI8pDm48kD6g6d_8IznzvwGE9lO5DQoUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYy7Mythp_T-mtop-vrsUOmeInPi9iDjx9w8K4ZfjXt2dkohZJiDdrI1I8fvN-mvKNK5lz5E2twVKTvGuJDiNEjuG6v6ULRah83RgHXAWD5lbQ/ikea_love.jpg",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTURyMDesWvDpRWew1DxMNB_aZWuCDStxy7tg&usqp=CAU",
+    "https://i.pinimg.com/236x/9d/e0/86/9de086c3b9fa5b716f8566beacc48144--funny-commercials-funny-ads.jpg"
+  ],
   "users": [
     {
       "id": 1,
@@ -24,34 +29,17 @@
       "role": "user",
       "id": 2,
       "cart": []
+    },
+    {
+      "username": "adi",
+      "email": "adi@mail.com",
+      "password": "1111",
+      "role": "user",
+      "cart": [],
+      "id": 3
     }
   ],
   "products": [
-    {
-      "nameProduct": "Lampu Belajar",
-      "description": "Lampu Untuk belajar",
-      "brand": "Philips",
-      "stock": [
-        {
-          "id": null,
-          "type": "Black",
-          "qty": 5
-        },
-        {
-          "id": null,
-          "type": "White",
-          "qty": 20
-        }
-      ],
-      "image": [
-        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/092/0609293_PE684430_S4.jpg",
-        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/724/0472405_PE614068_S4.jpg",
-        "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/768/0176854_PE309442_S4.jpg"
-      ],
-      "category": "Lampu",
-      "price": 350000,
-      "id": 3
-    },
     {
       "nameProduct": "Lemari Pakaian",
       "description": "Lemari pakaian ini memadukan garis bersih desain perabot Skandinavia dengan tampilan dan nuansa orient. Penyimpanan untuk pakaian dan barang-barang Anda serta potongan pernyataan di rumah Anda.",
@@ -151,29 +139,181 @@
   "userTransaction": [
     {
       "idUser": 2,
-      "username": "gugi",
-      "totalPayment": 121457000,
-      "cart": [
+      "nameUser": "gugi",
+      "totalPembayaran": 594000,
+      "keranjang": [
+        {
+          "nameProduct": "Gantungan",
+          "type": "White",
+          "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/412/0941222_PE795397_S4.jpg",
+          "price": 99000,
+          "qty": 6,
+          "totalHarga": 594000
+        }
+      ],
+      "status": "paid",
+      "date": "26/4/2021",
+      "id": 1
+    },
+    {
+      "idUser": 2,
+      "nameUser": "gugi",
+      "totalPembayaran": 594000,
+      "keranjang": [
+        {
+          "nameProduct": "Gantungan",
+          "type": "White",
+          "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/412/0941222_PE795397_S4.jpg",
+          "price": 99000,
+          "qty": 6,
+          "totalHarga": 594000
+        }
+      ],
+      "status": "paid",
+      "date": "26/4/2021",
+      "id": 2
+    },
+    {
+      "idUser": 2,
+      "nameUser": "gugi",
+      "totalPembayaran": 495000,
+      "keranjang": [
+        {
+          "nameProduct": "Gantungan",
+          "type": "White",
+          "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/412/0941222_PE795397_S4.jpg",
+          "price": 99000,
+          "qty": 5,
+          "totalHarga": 495000
+        }
+      ],
+      "status": "paid",
+      "date": "27/4/2021",
+      "id": 3
+    },
+    {
+      "idUser": 2,
+      "nameUser": "gugi",
+      "totalPembayaran": 1497000,
+      "keranjang": [
+        {
+          "nameProduct": "Piring",
+          "type": "Black",
+          "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/544/0454476_PE602782_S4.jpg",
+          "price": 499000,
+          "qty": 3,
+          "totalHarga": 1497000
+        }
+      ],
+      "status": "paid",
+      "date": "27/4/2021",
+      "id": 4
+    },
+    {
+      "idUser": 2,
+      "nameUser": "gugi",
+      "totalPembayaran": 3299000,
+      "keranjang": [
+        {
+          "nameProduct": "Lemari Pakaian",
+          "type": "Brown",
+          "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/560/0756080_PE748763_S4.jpg",
+          "price": 3299000,
+          "qty": 1,
+          "totalHarga": 3299000
+        }
+      ],
+      "status": "unpaid",
+      "date": "27/4/2021",
+      "id": 5
+    },
+    {
+      "idUser": 2,
+      "nameUser": "gugi",
+      "totalPembayaran": 297000,
+      "keranjang": [
+        {
+          "nameProduct": "Gantungan",
+          "type": "Black",
+          "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/412/0941222_PE795397_S4.jpg",
+          "price": 99000,
+          "qty": 3,
+          "totalHarga": 297000
+        }
+      ],
+      "status": "unpaid",
+      "date": "27/4/2021",
+      "id": 6
+    },
+    {
+      "idUser": 2,
+      "nameUser": "gugi",
+      "totalPembayaran": 998000,
+      "keranjang": [
         {
           "nameProduct": "Piring",
           "type": "White",
-          "qty": 3,
           "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/544/0454476_PE602782_S4.jpg",
           "price": 499000,
-          "totalHarga": 1497000
+          "qty": 2,
+          "totalHarga": 998000
+        }
+      ],
+      "status": "unpaid",
+      "date": "27/4/2021",
+      "id": 7
+    },
+    {
+      "idUser": 2,
+      "nameUser": "gugi",
+      "totalPembayaran": 10895000,
+      "keranjang": [
+        {
+          "nameProduct": "Piring",
+          "type": "Green",
+          "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/544/0454476_PE602782_S4.jpg",
+          "price": 499000,
+          "qty": 2,
+          "totalHarga": 998000
+        },
+        {
+          "nameProduct": "Lemari Pakaian",
+          "type": "Brown",
+          "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/560/0756080_PE748763_S4.jpg",
+          "price": 3299000,
+          "qty": 3,
+          "totalHarga": 9897000
+        }
+      ],
+      "status": "unpaid",
+      "date": "28/4/2021",
+      "id": 8
+    },
+    {
+      "idUser": 2,
+      "nameUser": "gugi",
+      "totalPembayaran": 60079000,
+      "keranjang": [
+        {
+          "nameProduct": "Gantungan",
+          "type": "White",
+          "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/412/0941222_PE795397_S4.jpg",
+          "price": 99000,
+          "qty": 1,
+          "totalHarga": 99000
         },
         {
           "nameProduct": "Sofa",
           "type": "Black",
-          "qty": 4,
           "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/201/0620123_PE689434_S4.jpg",
           "price": 29990000,
-          "totalHarga": 119960000
+          "qty": 2,
+          "totalHarga": 59980000
         }
       ],
       "status": "unpaid",
-      "date": "11/3/2021",
-      "id": 1
+      "date": "29/4/2021",
+      "id": 9
     }
   ]
 }
